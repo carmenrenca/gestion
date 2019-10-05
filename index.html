@@ -14,9 +14,9 @@
 <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-firestore.js"></script>
   </head>
   <body>
-    <div >
+    <div class="container col-md" >
       <nav class="navbar navbar-light ">
-        
+        <img src="logo.png" class="icono">
         <button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#miModal">
   Crear cliente
 </button>
@@ -24,16 +24,18 @@
       <nav class="navbar navbar-dark bg-dark">
   <!-- Navbar content -->
   </nav>
-  <div class="vertical">
-    
-  <nav class="nav flex-column bg-dark col-sm-2 vertical">
+  
+    <div class="container col-sm-2 bg-dark vertical " >
+        <nav class="nav flex-column  col-sm-2 " >
   <a class="nav-link active" href="#">Home</a>
   <a class="nav-link" href="#">Selecionar Articulos</a>
-  <a class="nav-link" href="usuarios.html">Usuarios</a>
+  <a class="nav-link" href="usuarios.html">Clientes</a>
    <a class="nav-link" href="#">Facturas</a>
   <a class="nav-link disabled" href="#">Disabled</a>
 </nav>
-  </div>
+    </div>
+
+
 
     </div>
 
@@ -45,7 +47,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" id="close"   class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
     
