@@ -482,37 +482,13 @@ db.collection("clientes").where("dni", "==", cod)
     });
 }
 
-//En esta funcion vamos a devolver los nombre de los articulos junto con los precios y a su vez
-//vamos a guardar en la la tabla detalle factura los datos que vayamos poniendo
+//funcion en la cual voy a infresar la factura en la base de datos 
 
-function crearfactura(){
-
-var tabla_AddArt= document.getElementById('add_articulos');
-
-db.collection("articulos").onSnapshot((querySnapshot) => {
-  //limpiamos la tabla 
-var c;
-
-  tabla_AddArt.innerHTML='';
-
-    querySnapshot.forEach((doc) => {
-
-      tabla_AddArt.innerHTML +=`
-      <tr>
-        <td>${c=doc.id }  </td>
-        <td>${doc.data().nombre }  </td>
-        <td><input id="cantidad"  onchange="myFunction()" type="number" name="quantity" value="1" /> </td>
-  ${x = document.getElementById("cantidad")}
-    <td> <p>${doc.data().precio}</p> </td>
-
-      <td><button type="button" class="btn btn-primary" onclick="añadirlineaf('${c }' ,'${doc.data().nombre }','${doc.data().precio}','${x}')">Add</button></td>
-      </tr>
-      `
-
-    });
-});  
+function facturaBD(){
 
 }
+
+
 
 //////mostrar los articulos del sistema
 
@@ -572,26 +548,38 @@ function anadir_art(){
   var nombre= document.getElementById('artf').value
   var cantidad= document.getElementById('cantidad').value
  var preciototal=precio*cantidad;
- var sumatotal=+preciototal;
-console.log(nombre);
+ var sumatotal=0;
+
+console.log(sumatotal+"total");
 
 //vamos a añadir nuestor articulo a la nuestra factura para eso vamos a ir recorriendo la tabla
 
 var fila="<tr><td>"+codigo+"</td><td>"+nombre+"</td><td>"+precio+"</td><td>"+cantidad+"</td><td>"+preciototal+"</td></tr>";
+var total="<tr><td>"+"</td><td>"+"</td><td>"+"</td><td>"+'SUBTOTAL €'+"</td><td>"+sumatotal+"</td></tr>";
   var btn = document.createElement("TR");
      btn.innerHTML=fila;
     document.getElementById("lineaf").appendChild(btn);
-
+ 
  document.getElementById('codigo').value='';
  document.getElementById('precio').value='';
-document.getElementById('cantidad').value='';
+calculototal(preciototal);
 }
+var cuenta = [];
+function calculototal(n){
+//SUBTOTAL
+cuenta.push(n);
+ var sumatotal=0;
+   
+for (var i=0; i<cuenta.length; i++) { sumatotal = sumatotal + cuenta[i] ; }
+ 
+  console.log(sumatotal);
+document.getElementById('preciototal').value=sumatotal;
 
-function myFunction() {
+///IVA
+var iva;
+iva=sumatotal*0.18;
 
-
-
- var x = document.getElementById("cantidad");
- console.log(x.value);
-  return x;
+document.getElementById('iva').value=iva;
+//TOTAL
+document.getElementById('total').value=iva+sumatotal;
 }

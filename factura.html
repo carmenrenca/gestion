@@ -44,9 +44,7 @@
 
     </div>
  
-<nav class="navbar navbar-dark bg-primary">
-  <!-- Navbar content -->
-</nav>
+
 
     </div>
 
@@ -55,6 +53,12 @@
 <div class="card">
   <div class="card-header">
     Nueva Factura
+      <div class="col-3 col-md-offset-3 idf">
+ <input id="Nfactura" type="text" class="form-control " placeholder="Nº Factura" disabled>
+     
+    </div>
+   
+
   </div>
   <div class="card-body">
   <form>
@@ -91,8 +95,8 @@
   </div>
 </form>
   </div>
-  <table class="table mt-9">
-  <thead>
+  <table class="table mt-9 table-striped">
+  <thead class="thead-dark">
     <tr>
       <th scope="col">CODIGO</th>
      
@@ -105,12 +109,33 @@
   <tbody id="lineaf">
     
   </tbody>
+  <tfoot id="lineafooter">
+    <td></td>
+    <td></td>
+     <td></td>
+    <td>SUBTOTAL €</td>
+    <td> <input id="preciototal" type="text" class="form-control col-5"  ></td>
+    <tr>
+     <td></td>
+    <td></td>
+     <td></td>
+      <td>IVA 18%</td>
+      <td> <input id="iva" type="text" class="form-control col-5"  ></td>
+    </tr>
+     <tr>
+     <td></td>
+    <td></td>
+     <td></td>
+      <td>TOTAL</td>
+      <td> <input id="total" type="text" class="form-control col-5"  ></td>
+    </tr>
+  </tfoot>
 </table>
 </div>
 </div>
 
-//ventana emergente para añadir los productos a la factura
 
+<!-- ventana emergente para añadir los productos a la factura -->
 <!-- Modal -->
 <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg " role="document">
@@ -157,6 +182,7 @@
 
 
   </div>
+  <button type="button" onclick="calculototal()" class="btn  btn-secondary col-3">Cerrar</button>
 </div>
     </div>
   </div>
