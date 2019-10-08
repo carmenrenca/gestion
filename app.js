@@ -64,16 +64,16 @@ if(nombre==""){
 //leer documento
 //onSnashot() esto  va ha estar escuchando cada vez que se haga un cambio a la base
 //de datos y lo va a reflejar en nuestra web
-var tabla= document.getElementById('tabla');
+var tablacli= document.getElementById('tablacliente');
 
 db.collection("clientes").onSnapshot((querySnapshot) => {
 	//limpiamos la tabla 
 
-	tabla.innerHTML='';
+	tablacli.innerHTML='';
 
     querySnapshot.forEach((doc) => {
 
-    	tabla.innerHTML +=`
+    	tablacli.innerHTML +=`
     	<tr>
     		<td>${doc.id }  </td>
     		<td>${doc.data().nombre }  </td>
@@ -254,16 +254,16 @@ if(nombre==""){
 
 }
 	
-var tabla= document.getElementById('tablaarticulo');
+var tablaart= document.getElementById('tablaarticulo');
 
 db.collection("articulos").onSnapshot((querySnapshot) => {
 	//limpiamos la tabla 
 
-	tabla.innerHTML='';
+	tablaart.innerHTML='';
 
     querySnapshot.forEach((doc) => {
 
-    	tabla.innerHTML +=`
+    	tablaart.innerHTML +=`
     	<tr>
     		<td>${doc.id }  </td>
     		<td>${doc.data().nombre }  </td>
@@ -337,7 +337,7 @@ function editar_user(id,nombre, precio, stock,descripcion){
 	//limpiar formulario
 	
 	b.onclick= function(){
-		console.log("entroo")
+	
 		var washingtonRef = db.collection("articulos").doc(id);
 	
 var nombre=  document.getElementById('nombre').value;
@@ -375,3 +375,223 @@ a.style.display='';
 	}
 	
 	}
+
+	/////////////////////////////////FATURA\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+	//mostrar clientes
+var tablaf= document.getElementById('tablafactura');
+
+
+db.collection("factura").onSnapshot((querySnapshot) => {
+	//limpiamos la tabla 
+
+	tablaf.innerHTML='';
+
+    querySnapshot.forEach((doc) => {
+
+    	tablaf.innerHTML +=`
+    	<tr>
+    		<td>${doc.id }  </td>
+    		<td>${doc.data().id_cliente }  </td>
+
+    		<td>${doc.data().fecha}</td>
+    	
+  <td><button type="button" class="btn btn-info" onclick="editar_user('${doc.id }','${doc.data().id_cliente}','${doc.data().fecha}')" data-toggle="modal" data-target="#miModalart">Editar</button></td>
+    	</tr>
+    	`
+    
+
+
+      
+    });
+
+});
+
+function busca_factura(){
+
+	
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInputfac");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("tablef");
+   console.log(table);
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  
+}
+}
+
+
+//mostrar clientes para crear la factura
+
+var cl= document.getElementById('sele');
+
+db.collection("clientes").onSnapshot((querySnapshot) => {
+  //limpiamos la tabla 
+
+  cl.innerHTML='';
+
+    querySnapshot.forEach((doc) => {
+
+     cl.innerHTML +=`
+    
+     <option>${doc.data().dni}  </option>
+           
+      </tr>
+      `
+     //<option>${doc.data().nombre } ${doc.data().apellido} </option>
+
+
+      
+    });
+
+});
+
+//Funcion para devolverme los datos del cliente en la factura despues de elegir su DNI
+function funcionprueba(){
+  var cod = document.getElementById("sele").value;
+var f = new Date();
+console.log(cod);
+
+db.collection("clientes").where("dni", "==", cod)
+    .get()
+    .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            // doc.data() is never undefined for query doc snapshots
+        document.getElementById('nombre').value= doc.data().nombre;
+        document.getElementById('apellido').value= doc.data().apellido;
+          document.getElementById('telefono').value= doc.data().telefono;
+            document.getElementById('direccion').value= doc.data().direccion;
+              document.getElementById('email').value= doc.data().email;
+
+
+        });
+    })
+
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });
+}
+
+//En esta funcion vamos a devolver los nombre de los articulos junto con los precios y a su vez
+//vamos a guardar en la la tabla detalle factura los datos que vayamos poniendo
+
+function crearfactura(){
+
+var tabla_AddArt= document.getElementById('add_articulos');
+
+db.collection("articulos").onSnapshot((querySnapshot) => {
+  //limpiamos la tabla 
+var c;
+
+  tabla_AddArt.innerHTML='';
+
+    querySnapshot.forEach((doc) => {
+
+      tabla_AddArt.innerHTML +=`
+      <tr>
+        <td>${c=doc.id }  </td>
+        <td>${doc.data().nombre }  </td>
+        <td><input id="cantidad"  onchange="myFunction()" type="number" name="quantity" value="1" /> </td>
+  ${x = document.getElementById("cantidad")}
+    <td> <p>${doc.data().precio}</p> </td>
+
+      <td><button type="button" class="btn btn-primary" onclick="añadirlineaf('${c }' ,'${doc.data().nombre }','${doc.data().precio}','${x}')">Add</button></td>
+      </tr>
+      `
+
+    });
+});  
+
+}
+
+//////mostrar los articulos del sistema
+
+var cla= document.getElementById('artf');
+
+db.collection("articulos").onSnapshot((querySnapshot) => {
+  //limpiamos la tabla 
+
+  cla.innerHTML='';
+
+    querySnapshot.forEach((doc) => {
+
+     cla.innerHTML +=`
+    
+     <option>${doc.data().nombre}  </option>
+           
+      </tr>
+      `
+     //<option>${doc.data().nombre } ${doc.data().apellido} </option>
+
+
+      
+    });
+
+});
+
+function funcionmostrardatoart(){
+  var cod = document.getElementById("artf").value;
+
+console.log(cod);
+
+db.collection("articulos").where("nombre", "==", cod)
+    .get()
+    .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            // doc.data() is never undefined for qu ery doc snapshots
+        document.getElementById('codigo').value= doc.id;
+        document.getElementById('precio').value= doc.data().precio;
+        
+
+
+
+        });
+    })
+
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });
+}
+
+
+
+function anadir_art(){
+  
+  var codigo =document.getElementById('codigo').value;
+  var precio=document.getElementById('precio').value;
+  var nombre= document.getElementById('artf').value
+  var cantidad= document.getElementById('cantidad').value
+ var preciototal=precio*cantidad;
+ var sumatotal=+preciototal;
+console.log(nombre);
+
+//vamos a añadir nuestor articulo a la nuestra factura para eso vamos a ir recorriendo la tabla
+
+var fila="<tr><td>"+codigo+"</td><td>"+nombre+"</td><td>"+precio+"</td><td>"+cantidad+"</td><td>"+preciototal+"</td></tr>";
+  var btn = document.createElement("TR");
+     btn.innerHTML=fila;
+    document.getElementById("lineaf").appendChild(btn);
+
+ document.getElementById('codigo').value='';
+ document.getElementById('precio').value='';
+document.getElementById('cantidad').value='';
+}
+
+function myFunction() {
+
+
+
+ var x = document.getElementById("cantidad");
+ console.log(x.value);
+  return x;
+}

@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+  <head>
+
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Paginas de mi web -->
+   <link rel="stylesheet" type="text/css" href="estilo.css">
+   
+
+    <!--firebase-->
+    <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-app.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-firestore.js"></script>
+  </head>
+  <body >
+    <div class="container col-md" >
+      <nav class="navbar navbar-light ">
+        <img src="logo.png" class="icono">
+        <button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#miModal">
+  Crear cliente
+</button>
+      </nav>
+
+
+      <nav class="navbar navbar-dark bg-dark">
+  <!-- Navbar content -->
+  </nav>
+ 
+    <div class="container col-sm-2 bg-dark vertical " >
+        <nav class="nav flex-column  col-sm-2 " >
+  <a class="nav-link active" href="#">Home</a>
+  <a class="nav-link" href="#">Selecionar Articulos</a>
+  <a class="nav-link" href="usuarios.html">Clientes</a>
+   <a class="nav-link" href="#">Facturas</a>
+  <a class="nav-link disabled" href="#">Disabled</a>
+</nav>
+    
+
+    </div>
+ 
+<nav class="navbar navbar-dark bg-primary">
+  <!-- Navbar content -->
+</nav>
+
+    </div>
+
+<div class="table-responsive col-sm-12  tabf " >
+
+<div class="card">
+  <div class="card-header">
+    Nueva Factura
+  </div>
+  <div class="card-body">
+  <form>
+  <div class="row">
+    <div class="col-3">
+      <select id="sele"  onchange=" funcionprueba()" class="form-control">
+  <option>Introduzca el dni</option>
+</select>
+    </div>
+
+    <div class="col-3">
+<input id="nombre" type="text" class="form-control" placeholder="cliente" disabled>
+     
+    </div>
+    <div class="col-3">
+      <input id="apellido" type="text" class="form-control" placeholder="Apellido" disabled>
+    </div>
+    <div class="col-3">
+      <input id="telefono" type="text" class="form-control" placeholder="Teléfono" disabled>
+    </div>
+    <div class="col-3 mt-4">
+      <input id="direccion" type="text" class="form-control" placeholder="Direccion" disabled>
+    </div>
+
+    <div class="col-3 mt-4">
+      <input id="email" type="text" class="form-control" placeholder="Email" disabled>
+    </div>
+     <div class="col-2 mt-4">
+      <input id="fecha" type="text" class="form-control" placeholder="fecha" disabled>
+    </div>
+     <div id=botonesf class="botonesf mt-6 "><button type="button" class="btn btn-outline-primary " data-toggle="modal" data-target="#exampleModal" onclick="crearfactura()">+ Producto</button>
+      <button type="button" class="btn btn-outline-secondary" >Nuevo Cliente</button>
+     </div>
+  </div>
+</form>
+  </div>
+  <table class="table mt-9">
+  <thead>
+    <tr>
+      <th scope="col">CODIGO</th>
+     
+      <th scope="col">NOMBRE ART.</th>
+      <th scope="col">PRECIO UNIT.</th>
+       <th scope="col">CANT.</th>
+      <th scope="col">PRECIO TOTAL</th>
+    </tr>
+  </thead>
+  <tbody id="lineaf">
+    
+  </tbody>
+</table>
+</div>
+</div>
+
+//ventana emergente para añadir los productos a la factura
+
+<!-- Modal -->
+<div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg " role="document">
+    <div class="modal-content ">
+     
+   <div class="card">
+  <div class="card-header">
+    Buscar productos
+  </div>
+  <div class="card-body">
+
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Eliga el artículos</th>
+      <th scope="col">Código</th>
+      <th scope="col">Precio</th>
+      <th scope="col">cantidad</th>
+
+    </tr>
+     
+  </thead>
+  <tbody>
+  <tr>
+      <th>
+          <select onclick="funcionmostrardatoart()" id="artf" class="form-control col-lg-12">
+  <option>Eliga un artículo</option>
+</select>
+  <td><div class="col-11"> <input id="codigo" type="text" class="form-control" disabled> </div></td>
+  <td><div class="col-8">  <input id="precio" type="text" class="form-control" disabled>   </div></td>
+  <td><div class="col-9"> <input id="cantidad" type="number" class="form-control" value="1"  ></div></td>
+  <td><button onclick="anadir_art()" type="button" class="btn btn-info">+</button></td>
+  
+      </th>
+     
+    </tr>
+  </tbody>
+
+</table>
+
+
+
+  
+
+
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="app.js"></script>
+
+  </body>
+</html>

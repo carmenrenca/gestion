@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> 
 <link rel="stylesheet" type="text/css" href="estilo.css">
 
     <!--firebase-->
@@ -40,7 +40,28 @@
     </div>
 
   
+<div class="table-responsive col-sm-5  tabf" >
+  <input type="text" id="myInputfac" onkeyup="busca_factura()" placeholder="Introduce el ID..." title="Type in a name">
+    <table id="tablef" class="table  table-striped table-bordered table-sm  table-condensed table-hover"  >
 
+  <thead class="thead-dark ">
+    
+    <tr>
+      <th  scope="col">ID_Factura</th>
+      <th  scope="col">ID Cliente</th>
+      
+      <th scope="col">Fecha</th>
+     
+           <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody id="tablafactura">
+
+
+  </tbody>
+</table>
+
+  </div>
 
 
 <div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
