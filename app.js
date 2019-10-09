@@ -397,6 +397,7 @@ db.collection("factura").onSnapshot((querySnapshot) => {
     		<td>${doc.data().fecha}</td>
     	
   <td><button type="button" class="btn btn-info" onclick="editar_user('${doc.id }','${doc.data().id_cliente}','${doc.data().fecha}')" data-toggle="modal" data-target="#miModalart">Editar</button></td>
+  <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#miModalart">Mostrar</button></td>
     	</tr>
     	`
     
@@ -554,7 +555,7 @@ console.log(sumatotal+"total");
 
 //vamos a añadir nuestor articulo a la nuestra factura para eso vamos a ir recorriendo la tabla
 
-var fila="<tr><td>"+codigo+"</td><td>"+nombre+"</td><td>"+precio+"</td><td>"+cantidad+"</td><td>"+preciototal+"</td></tr>";
+var fila="<tr><td>"+codigo+"</td><td>"+nombre+"</td><td>"+precio+"</td><td>"+cantidad+"</td><td>"+preciototal+"</td><td><button class='btn btn-danger'>Eliminar</button></td><td><button class='btn btn-info'>Editar</button></td></tr>";
 var total="<tr><td>"+"</td><td>"+"</td><td>"+"</td><td>"+'SUBTOTAL €'+"</td><td>"+sumatotal+"</td></tr>";
   var btn = document.createElement("TR");
      btn.innerHTML=fila;

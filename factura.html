@@ -22,9 +22,6 @@
     <div class="container col-md" >
       <nav class="navbar navbar-light ">
         <img src="logo.png" class="icono">
-        <button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#miModal">
-  Crear cliente
-</button>
       </nav>
 
 
@@ -34,10 +31,10 @@
  
     <div class="container col-sm-2 bg-dark vertical " >
         <nav class="nav flex-column  col-sm-2 " >
-  <a class="nav-link active" href="#">Home</a>
-  <a class="nav-link" href="#">Selecionar Articulos</a>
+  <a class="nav-link active" href="index.html">Lista de facturas</a>
+  <a class="nav-link" href="articulos.html">Selecionar Articulos</a>
   <a class="nav-link" href="usuarios.html">Clientes</a>
-   <a class="nav-link" href="#">Facturas</a>
+   <a class="nav-link" href="factura.html">Facturas</a>
   <a class="nav-link disabled" href="#">Disabled</a>
 </nav>
     
@@ -51,14 +48,20 @@
 <div class="table-responsive col-sm-12  tabf " >
 
 <div class="card">
+  <form>
+    
   <div class="card-header">
     Nueva Factura
-      <div class="col-3 col-md-offset-3 idf">
+    <div class="row">
+      <div class="col-3">
  <input id="Nfactura" type="text" class="form-control " placeholder="Nº Factura" disabled>
-     
+      </div>
+ <div class="col-2 " style="align-content: center">
+    <input id="fecha" type="text" class="form-control" placeholder="fecha">
+  </div>
     </div>
-   
-
+  </div>
+  </form>
   </div>
   <div class="card-body">
   <form>
@@ -86,11 +89,8 @@
     <div class="col-3 mt-4">
       <input id="email" type="text" class="form-control" placeholder="Email" disabled>
     </div>
-     <div class="col-2 mt-4">
-      <input id="fecha" type="text" class="form-control" placeholder="fecha" disabled>
-    </div>
-     <div id=botonesf class="botonesf mt-6 "><button type="button" class="btn btn-outline-primary " data-toggle="modal" data-target="#exampleModal" onclick="crearfactura()">+ Producto</button>
-      <button type="button" class="btn btn-outline-secondary" >Nuevo Cliente</button>
+     <div id=botonesf class="col-3 mt-4">
+        <button type="button" class="btn btn-outline-primary " data-toggle="modal" data-target="#exampleModal" onclick="crearfactura()">+ Producto</button>
      </div>
   </div>
 </form>
@@ -104,6 +104,8 @@
       <th scope="col">PRECIO UNIT.</th>
        <th scope="col">CANT.</th>
       <th scope="col">PRECIO TOTAL</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody id="lineaf">
@@ -119,7 +121,7 @@
      <td></td>
     <td></td>
      <td></td>
-      <td>IVA 18%</td>
+      <td>IVA</td>
       <td> <input id="iva" type="text" class="form-control col-5"  ></td>
     </tr>
      <tr>
@@ -131,6 +133,9 @@
     </tr>
   </tfoot>
 </table>
+<div style="margin-left: 27cm">
+<button type="button" class="btn btn-outline-primary " data-toggle="modal" data-target="#exampleModal">Guardar</button>
+</div>
 </div>
 </div>
 
@@ -153,8 +158,9 @@
       <th scope="col">Eliga el artículos</th>
       <th scope="col">Código</th>
       <th scope="col">Precio</th>
-      <th scope="col">cantidad</th>
-
+      <th scope="col">Descuento</th>
+      <th scope="col">Cantidad</th>
+      
     </tr>
      
   </thead>
@@ -166,7 +172,9 @@
 </select>
   <td><div class="col-11"> <input id="codigo" type="text" class="form-control" disabled> </div></td>
   <td><div class="col-8">  <input id="precio" type="text" class="form-control" disabled>   </div></td>
+  <td><div class="col-10"> <input id="descuento" class="form-control"></div></td>
   <td><div class="col-9"> <input id="cantidad" type="number" class="form-control" value="1"  ></div></td>
+
   <td><button onclick="anadir_art()" type="button" class="btn btn-info">+</button></td>
   
       </th>
