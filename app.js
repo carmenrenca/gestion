@@ -584,3 +584,7 @@ document.getElementById('iva').value=iva;
 //TOTAL
 document.getElementById('total').value=iva+sumatotal;
 }
+
+
+
+

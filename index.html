@@ -12,6 +12,9 @@
     <!--firebase-->
     <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-firestore.js"></script>
+<!--Print.js-->
+<link rel="stylesheet" type="text/css" href="https://printjs-4de6.kxcdn.com/print.min.css">
+
   </head>
   <body>
     <div class="container col-md" >
@@ -60,6 +63,7 @@
   </tbody>
 </table>
 
+<button class="btn btn-info" id="div_print" value="Print">Imprimir</button>
   </div>
 
 
@@ -84,6 +88,7 @@
          <input type="text" id="fecha" placeholder="fecha" class="form-control my-3" required>
          <input type="text" id="dni" placeholder="DNI" class="form-control my-3" required>  
          <button class="btn btn-info" id="boton" onclick="guardarcliente()">Registrar</button>
+         
     </div>
       </div>
     </div>
@@ -98,6 +103,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="app.js"></script>
+<script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+<script>
+document.getElementById('div_print').addEventListener("click", print)
+
+function print() {
+    printJS({
+        printable: 'tablef',
+        type: 'html',
+        targetStyles: ['*']
+    })
+}
+
+</script>
 
   </body>
 </html>
